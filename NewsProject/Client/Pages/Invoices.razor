@@ -1,0 +1,68 @@
+﻿@page "/Invoices"
+@attribute [Authorize]
+<PageTitle>الفواتير </PageTitle>
+@if (_invouce != null)
+{
+    <div class="card">
+    <div class="card-header">
+        <h3>قائمة الفواتير <a href="InvoicesAdd" class="float-lfte"><h5 class="btn btn-primary"> إضافة </h5></a></h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                       رقم الفاتروة 
+                    </th>
+                    
+                    <th>
+                         العميل
+                    </th>
+                    <th>
+                        الاجمالي  
+                    </th>
+                    <th>
+                        الخصم
+                    
+                    </th>
+                    <th>
+                        بعد الخصم
+                    </th><th>
+                        الفرع
+                    </th>
+                    <th>
+                       نوع الفاتورة 
+                    </th>
+                    <th>
+                        حذف
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Item in _invouce)
+                {
+                    <tr>
+                        <td>@Item.InvoiceId</td>
+            
+                     <td>@Item.SuppId</td>
+                      <td>@Item.Total.ToString("c")</td>
+                       <td>@Item.Discont.ToString("c")</td>
+                        <td>@Item.Discontafter.ToString("c")</td>
+                         <td>@Item.Barench.BarenchName</td>
+                         <td>
+                          @Item.Qountte 
+                
+                             </td> 
+                             
+                    <td><button type="button" class="btn btn-danger" @onclick = "() => Delete(Item.InvoiceId)">حذف </button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+
+
+
+}

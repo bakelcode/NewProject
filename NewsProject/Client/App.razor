@@ -1,0 +1,24 @@
+﻿@inject NavigationManager _navigationManager
+<CascadingAuthenticationState>
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" >
+            <Authorizing>
+                <h3>Please whait, Check you account</h3>
+            </Authorizing>
+            <NotAuthorized>
+                @{
+                    _navigationManager.NavigateTo("/Unauthorized");
+                }
+            </NotAuthorized>
+        </AuthorizeRouteView>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>404 Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <img src="Errors/NotFound.png" alt="Not found" style="width:95%"/>
+        </LayoutView>
+    </NotFound>
+</Router>
+</CascadingAuthenticationState>

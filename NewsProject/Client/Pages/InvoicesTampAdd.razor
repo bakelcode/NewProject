@@ -1,0 +1,237 @@
+﻿
+@attribute [Authorize]
+
+<div class=" " 
+style="
+    margin-top: 15px;
+    margin-bottom: 15px;">
+ <EditForm Model="invoiceTemps" OnValidSubmit="Create" >
+      <DataAnnotationsValidator />
+   
+      <div class="row g-6">
+        <div class="col-sm">
+            <div class="form-outline">
+                <InputSelect id="categoryId" 
+                ValueChanged="@((int value) => GetNewsByCategoryId(value))"
+                ValueExpression="@(() => CatId)" 
+                Value="@invoiceTemps.CategoryId" class="form-control " >
+                 <option value="0">... القسم... </option>
+                    @foreach (var item in categories)
+                   {
+                        <option value="@item.Id">@item.CategoryName</option>
+
+                   }
+                  
+              </InputSelect>
+               <ValidationMessage For="@(() => invoiceTemps.CategoryId)" />
+     
+            </div>
+        </div>
+ 
+  
+  
+  <div class="col-sm">
+    <div class="form-outline">
+     <InputSelect id="BarenchID" @bind-Value="invoiceTemps.BarenchID" class="form-control ">
+                    
+                
+                 <option value="0"> ...الفرع... </option>
+                    @foreach (var item in barenches)
+                   {
+                        <option value="@item.BarenchID">@item.BarenchName</option>
+                   }
+                  
+              </InputSelect>
+               
+              <ValidationMessage For="@(() => invoiceTemps.BarenchID)" />
+      
+    </div>
+  </div>
+  <div class="col-sm">
+    <div class="form-outline">
+     
+      
+      <InputSelect id="ProductID" 
+                ValueChanged="@((int value) => GetInvoiceItampProductById(value))"
+                ValueExpression="@(() => ProId)" 
+                Value="@invoiceTemps.ProductID" class="form-control " >  
+                
+                 <option value="0"> ..المنتج...</option>
+                    @foreach (var item in  products)
+                   {
+                        <option value="@item.ProductID">@item.ProductName</option>
+                   }
+                 
+              </InputSelect>
+               <ValidationMessage For="@(() => invoiceTemps.ProductID)" />
+    </div>
+  </div>
+  
+      <div class="col-md">
+  
+         <div class="input-group ">
+  
+            <span class="input-group-text">السعر</span>
+               <InputNumber id="Price" @bind-Value="invoiceTemps.Price" class="form-control ">
+                 
+                    </InputNumber>
+                @*   <span class="input-group-text">ريال</span>*@
+                     <ValidationMessage For="@(() => invoiceTemps.Price)" />
+         </div>
+       </div>
+         
+       <div class="col-sm">
+  
+            <div class="input-group ">
+  
+                <span class="input-group-text">الكمية</span>
+                     <InputNumber id="Quntity" @bind-Value="invoiceTemps.Quntity" class="form-control ">
+                 
+                            </InputNumber>
+                   
+                    
+            </div>
+
+             <ValidationMessage For="@(() => invoiceTemps.Quntity)" />
+        </div>
+        <div class="col-sm">
+          <div class="md-2">
+            <button type="submit" class="btn btn-success md-2 float-end">اضافة</button>
+           </div>
+        </div>
+            
+</div>
+
+</EditForm>
+
+  </div>
+  <br/>
+
+  <br />
+@if (_invotemp != null)
+{
+    <div class="card">
+        <div class="card-header">
+            
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            رقم الطلب 
+                        </th>
+                        <th>
+                            الفرع 
+                        </th>
+                        <th>
+                            القسم 
+                        </th>
+                        <th>
+                            المنتج 
+                        </th>
+                        <th>
+                           بالوحدة السعر  
+                        </th>
+                        <th>
+                            الكمية  
+                        </th>
+                        <th>
+                            السعر بالجملة 
+                        </th>
+                        
+                        <th>
+                            حذف 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var itam in _invotemp)
+                    {
+                        <tr>
+                            <td>@itam.InvoiceTempID</td>
+                            <td>@itam.Barench.BarenchName</td>
+                            <td>@itam.Category.CategoryName</td>
+                            <td>@itam.Product.ProductName</td>
+                            <td>@itam.Price.ToString("c")</td>
+                            <td> @itam.Quntity</td>
+                            <td>@itam.Total.ToString("c")</td>
+                          
+                         @*   <td><a class="btn btn-info" href="/updatecategory/@itam.InvoiceTempID">Update</a></td>*@
+                            <td><button type="button" class="btn btn-danger" @onclick = "() => Delete(itam.InvoiceTempID)">Delete</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+          
+        </div>
+    </div>
+}
+
+  <br /> 
+  @*<EditForm Model="bakinv" >
+   <div class ="form-control">
+      <label>ch </label>
+        <input class="form-control"  @bind-value="Totall"   type ="number"  />
+         <input  @bind-value="bakinv.Discont"  @bind-value:event="oninput" @onchange ="(() => CalculateToatl())" class ="form-control" id="Discont"  TValue="@bakinv.Discont"  type ="number" />
+        <input  @bind-value="Totallafter" class ="form-control" type ="number" />
+       
+   </div>*@
+   @* <div class ="row pt-3" style= "background :#a7f5b9;    margin: 0px; ">
+      
+@*  
+         <div class= "col-md-3 mb-1 ">
+       
+          <Input class= "btn btn-success sm-2" type ="submit" value="حفظ الفاتووره" />
+          
+          < class= "btn btn-danger" type ="submit" value="حذف الفاتووره" />
+         </div>
+
+        
+           <div class ="col-md-3">
+               <div class ="input-group mb-3">
+               <div class ="input-group-prepend">
+                   <span class ="input-group-text"> الاجمالي
+                      <InputNumber   @bind-Value="@bakinv.Total" disabled  readonly  id="Total"  />
+                      </span>
+               </div>
+               
+               @*<Input  bind="@_invoice.Total" class ="form-control" id="Total"  TValue="@_invoice.Total"  type ="number" />*@
+              @* </div>
+           </div>
+
+           <div class ="col-md-3">
+               <div class ="input-group mb-2">
+               <div class ="input-group-prepend">
+                   <span class ="input-group-text">الخصم 
+             
+                <InputNumber   Value="@_invoice.Discont" id="Discont" ValueExpression="() =>_invoice.Discont"  ValueChanged="(decimal value) => DiscountChanged(value)" Placeholder="Enter discount" />
+            <ValidationMessage For="@(() => _invoice.Discont)" />
+                </span>
+                </div>
+               </div>
+           </div>
+           <div class ="col-md-3">
+               <div class ="input-group mb-3">
+               <div class ="input-group-prepend">
+                   <span class ="input-group-text"> بعد الخصم
+              *@
+               @*<Input class ="form-control" id="Discontafter" TValue="@invoice.Discontafter"  disabled='true' type ="number" value="@invoice.Discontafter" />*@
+                  @*  <InputNumber   @bind-Value="@_invoice.Discontafter" disabled readonly  id="Discontafter"  />
+                    </span>
+           </div>
+     </div>
+      </div>*@
+  
+   
+        
+ 
+
+
+
+
+
+
+
+

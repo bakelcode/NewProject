@@ -1,0 +1,45 @@
+﻿@page "/Register"
+<PageTitle>Register</PageTitle>
+<div class="card">
+    <div class="card-header">
+        <h3>Register new user</h3>
+    </div>
+
+    
+    <div class="card-body">
+        @if(RegisterErrors == true)
+        {
+            <div class="alert alert-danger" role="alert">
+                @foreach(var error in Errors)
+                {
+                    <h5>@error</h5>
+                }
+            </div>
+        }
+        <EditForm Model="_userregistration" OnValidSubmit="Register">
+            <DataAnnotationsValidator />
+            <div class="form-group row">
+                <label for="UserName" class="col-md-2 col-form-label">User name : </label>
+                <InputText id="UserName" class="form-control" @bind-Value="_userregistration.UserName"/>
+                <ValidationMessage For="@(() => _userregistration.UserName)" />
+            </div>
+            <div class="form-group row">
+                <label for="UserEmail" class="col-md-2 col-form-label">User email : </label>
+                <InputText id="UserEmail" class="form-control" @bind-Value="_userregistration.UserEmail"/>
+                <ValidationMessage For="@(() => _userregistration.UserEmail)" />
+            </div>
+            <div class="form-group row">
+                <label for="Password" class="col-md-2 col-form-label">Password : </label>
+                <InputText type="password" id="Password" class="form-control" @bind-Value="_userregistration.Password"/>
+                <ValidationMessage For="@(() => _userregistration.Password)" />
+            </div>
+            <div class="form-group row">
+                <label for="ConfirmPassword" class="col-md-2 col-form-label">ConfirmPassword : </label>
+                <InputText type="Password" id="ConfirmPassword" class="form-control" @bind-Value="_userregistration.ConfirmPassword"/>
+                <ValidationMessage For="@(() => _userregistration.ConfirmPassword)" />
+            </div>
+            <button type="submit" class="btn btn-success mt-2 float-end">Register</button>
+        </EditForm>
+    </div>
+
+</div>

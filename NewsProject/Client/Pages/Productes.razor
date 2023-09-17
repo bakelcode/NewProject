@@ -1,0 +1,94 @@
+﻿@page "/Productes"
+@attribute [Authorize]
+<PageTitle>المنتجات </PageTitle>
+@if (_product != null)
+{
+    <div class="card">
+    <div class="card-header">
+        <h3>قائمة المنتجات <a href="ProductAdd" class="float-end"><h5 class="btn btn-primary"> إضافة منتج</h5></a></h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                       رقم المنتج 
+                    </th>
+                    <th>
+                       صورة  المنج
+                    </th>
+                    <th>
+                       اسم  المنج
+                    </th>
+                    <th>
+                        السعر  
+                    </th>
+                    <th>
+                        الكمية
+                    
+                    </th>
+                    <th>
+                        القسم
+                    </th><th>
+                        الفرع
+                    </th>
+                    <th>
+                       تعديل 
+                    </th>
+                    <th>
+                        حذف
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Item in _product)
+                {
+                    <tr>
+                        <td>@Item.ProductID</td>
+                    <td><img src="NewsImages/@Item.Img" alt="No Image" style="width:80px; height:50px;     border-radius: 50%;"/></td>
+                     <td>@Item.ProductName</td>
+                      <td>@Item.Price</td>
+                       <td>@Item.Quntity</td>
+                        <td>@Item.Category.CategoryName</td>
+                         <td>@Item.Barench.BarenchName</td>
+                    <td><a class="btn btn-info" href="/ProductDetails/@Item.ProductID">تعديل</a></td>
+                    <td><button type="button" class="btn btn-danger" @onclick = "() => Delete(Item.ProductID)">حذف </button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+
+
+
+
+   @* @foreach (var Item in _product)
+    {
+        <div class="card mb-2">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>@Item.ProductName</h3>
+                        <h5>@Item.Quntity</h5>
+                    </div>
+                    <div class="col-md-3 float-end my-auto">
+                        <h5>@Item.Price</h5>
+                        <h5>@Item.Img</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2 m-3">
+                        <img src="NewsImages/@Item.Img" alt="No Image" style="width:120px;"/>
+                    </div>
+                    <div class="col-md-9 my-auto">
+                        <h3>@Item.ProductName<a href="ProductDetails/@Item.ProductID">Read More</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+}

@@ -1,0 +1,24 @@
+﻿@page "/updatecategory/{id}"
+@attribute [Authorize]
+<PageTitle>Update Category</PageTitle>
+
+<div class = "card">
+
+
+    <div class = "card-header"><h3>Update Category</h3></div>
+
+    <div class="card-body">
+        <EditForm Model="_category" OnValidSubmit="Update">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="CategoryName" class="form-label">Name :</label></div>
+                <div class="col-11"><InputText class = "form-control" id="CategoryName" @bind-Value="_category.CategoryName"></InputText></div>
+            </div>
+            <ValidationMessage For="@(() => _category.CategoryName)" />
+            </div>
+            <button type="submit" class="btn btn-success mt-2 float-end">Save</button>
+        </EditForm>
+    </div>
+
+</div>

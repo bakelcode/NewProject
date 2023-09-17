@@ -1,0 +1,63 @@
+﻿@page "/barenches"
+@attribute [Authorize]
+<PageTitle>الفروع</PageTitle>
+
+@if(_barenches == null)
+{
+    <span class="loader"></span>
+}
+else
+{
+    @*<button type="button" class="btn btn-danger mb-2" @onclick="GetErrors">Show errors</button>*@
+    @*<button type="button" class="btn btn-danger mb-2" @onclick="GetunAuthorized">Show Authorized</button>*@
+    @if(MyMessages != "")
+    {
+        <div class="alert alert-danger">@MyMessages</div>
+    }
+    <div class="card">
+    <div class="card-header">
+        <h3>فروعنا <a href="Newbarench" class="float-end"><h5 class="btn btn-primary">اضافة فرع جديد</h5></a></h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                       رقم الفرع
+                    </th>
+                    <th>
+                        اسم الفرع
+                    </th>
+                    <th>
+                        عنوان الفرع
+                    </th>
+                    <th>
+                        تاريخ انشاء الفرع
+                    </th>
+                    <th>
+                        تعديل 
+                    </th>
+                    <th>
+                        حذف
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var barench in _barenches)
+                {
+                    <tr>
+                        <td>@barench.BarenchID</td>
+                    <td>@barench.BarenchName</td>
+                    <td>@barench.Adderess</td>
+                    <td>@barench.CreatDate</td>
+                    <td><a class="btn btn-info" href="/updatebarench/@barench.BarenchID">تعديل</a></td>
+                    <td><button type="button" class="btn btn-danger" @onclick = "() => Delete(barench.BarenchID)">حذف</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 
+}
+
+

@@ -1,0 +1,19 @@
+﻿@page "/home"
+<PageTitle> BAKEL INAVOICES</PageTitle>
+
+
+<AuthorizeView>
+    <Authorized>
+        <h1><a href="counter">Click here</a></h1>
+
+        <p><button class="btn btn-primary" @onclick="GoToCounter">Click here to go to counter page</button></p>
+
+        <CascadingValue Value="@FontColor">
+            <HomeComponent Name="@context.User.FindFirst(ClaimTypes.Name).Value" @attributes="ImageAttribute"></HomeComponent>
+        </CascadingValue>
+    </Authorized>
+    <NotAuthorized>
+        <h3>You are not ahuthorized</h3>
+    </NotAuthorized>
+</AuthorizeView>
+

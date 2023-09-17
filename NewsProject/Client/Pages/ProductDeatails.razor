@@ -1,0 +1,53 @@
+﻿@page "/productDetails/{id}"
+@attribute [Authorize]
+@if(_product != null && _product.Category != null){
+<div class="card">
+    <div class=card-header>
+        <div class="row">
+                <div class="col-md-9">
+                    <h3>@_product.ProductName</h3>
+            <h5>ba</h5>
+                </div>
+            <div class="col-md-3 float-end my-auto">
+                <a href="" class="btn btn-primary">Update</a>
+                 <a href="" class="btn btn-danger">Delete</a>
+            </div>
+            </div>
+    </div>
+    <div class=card-body>
+        <div class="alert-primary">
+            <h5>@_product.CreatDate </h5>
+                <h5>@_product.Category.CategoryName</h5>
+        </div>
+        <img src="ProductImages/@_product.Img" alt="No Image" style="width:200px;"/>
+        <h4>@_product.Quntity</h4>
+        <h5>@_product.Price</h5>
+    </div>
+</div>
+
+//@*<EditForm Model="_newComment" OnValidSubmit="AddComment" class="card card-body bg-light mt-5">
+   @* <div class="form-group row">
+        <div class="col-md-12">
+            <InputText id="CommentDetail" class="form-control" @bind-Value="_newComment.CommentDetail" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">Add Comment</button>
+        </div>
+    </div>
+</EditForm>*@
+@*
+<h3>Comments</h3>
+    @if(_comments.Count > 0)
+    {
+        @foreach(var comment in _comments)
+        {
+            <div class="card">
+                <div class="card-header">@comment.CommentDate</div>
+                <div class="card-body">@comment.CommentDetail</div>
+            </div>
+        }
+    }
+*@//
+}

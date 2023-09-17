@@ -1,0 +1,58 @@
+﻿@page "/ProductAdd"
+@attribute [Authorize]
+<PageTitle>Add Product</PageTitle>
+
+<div class="card">
+   <div class="card-header"><h3>Add Product</h3></div>
+    @if (_categories != null)
+    {
+        <div class="card-body">
+            <EditForm Model="_product" OnValidSubmit="Create">
+                <DataAnnotationsValidator />
+               
+            <ValidationSummary />
+                     <div class="form-group row mb-md-2">
+                    <div class="col-6 mr-2">
+                        <InputText class="form-control" placeholder="Enter ProductName" id="ProductName" @bind-Value="_product.ProductName"></InputText></div>
+                    <div class="col-6 mr-2">
+                        <InputNumber class="form-control" placeholder="Enter Quntity" id="Quntity" @bind-Value="_product.Quntity">
+
+                        </InputNumber>
+                   @* <ValidationMessage For="@(() => _product.Quntity)" /> *@
+                    </div>
+                </div>
+
+                <div class="form-group row mb-md-2">
+                    <div class="col-6 mr-2"><InputNumber class="form-control" placeholder="Enter Price" id="Price" @bind-Value="_product.Price"></InputNumber></div>
+                    <div class="col-6 mr-2">
+                        <InputSelect id="Id" @bind-Value="_product.CategoryId" class="form-control">
+                            <option value=0>--اختيار القسم  --</option>
+                            @foreach (var options in _categories)
+                            {
+                            <option value="@options.Id">@options.CategoryName</option>
+                            }
+                    </InputSelect>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                    <div class="col-6 mr-2"><InputFile OnChange="@OnFileSelection"></InputFile></div>
+                        <img src="@imgUrl" style="width:150px" />
+            </div>
+
+
+            <div class="form-group row mb-md-2">
+                <div class="col-12 mr-2">
+                     <InputSelect id="BarenchID" @bind-Value="_product.BarenchId" class="form-control">
+                            <option value=0>-- اختيار الفرع --</option>
+                            @foreach (var options in _barench)
+                            {
+                            <option value="@options.BarenchID">@options.BarenchName</option>
+                            }
+                    </InputSelect>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success mt-2 float-end">Save</button>
+        </EditForm>
+        </div>     
+    }
+</div>

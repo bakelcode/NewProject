@@ -1,0 +1,30 @@
+﻿@page "/updatebarench/{id}"
+@attribute [Authorize]
+<PageTitle>تعديل الفرع</PageTitle>
+
+<div class = "card">
+
+
+    <div class = "card-header"><h3>تعديل الفرع</h3></div>
+
+    <div class="card-body">
+        <EditForm Model="_barench" OnValidSubmit="Update">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="BarenchName" class="form-label">الاسم :</label></div>
+                <div class="col-11"><InputText class = "form-control" id="BarenchName" @bind-Value="_barench.BarenchName"></InputText></div>
+            </div>
+            <ValidationMessage For="@(() => _barench.BarenchName)" />
+            </div>
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="Adderess" class="form-label">العنوان :</label></div>
+                <div class="col-11"><InputText class = "form-control" id="Adderess" @bind-Value="_barench.Adderess"></InputText></div>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-success mt-2 float-end">حفظ</button>
+        </EditForm>
+    </div>
+
+</div>

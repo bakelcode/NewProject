@@ -1,0 +1,168 @@
+﻿@page "/InvoicesAdd"
+@attribute [Authorize]
+<PageTitle>فاتورة جديدة </PageTitle>
+  
+<div class=" ">
+ <EditForm   Model="_invoice" OnValidSubmit="Create" >
+      <DataAnnotationsValidator />
+   
+      <div class="row g-6">
+        
+          <div class= "col-md-3 mb-1 ">
+       
+          @*<InputNumber class= "  sm-2" type ="number" @bind-Value="_invoice.InvoiceId " id="InvoiceId"  />*@
+          <InputDate class= "sm-2" @bind-Value="_invoice.Date" id="Date"  />
+          
+         
+         </div>
+         <div class="col-sm">
+                <div class="form-outline">
+              @*     <InputNumber id="InvoiceId" @bind-Value="invoice.InvoiceId" class="form-control "/>*@
+              
+                 </div>
+         </div>        
+           <div class="col-sm">
+            <div class="form-outline">
+                <InputSelect id="Qountte" @bind-Value="_invoice.Qountte" 
+                class="form-control "  >
+                 <option value="0"> نوع الفانورة </option>
+                    
+                   
+                        <option value="1">نقداً</option>
+                        <option value="2">أجل </option>
+                        <option value="3"> شيك بنكي </option>
+                        <option value="4"> دفع الكتروني</option>
+
+                   
+                  
+              </InputSelect>
+               <ValidationMessage For="@(() => _invoice.Qountte)" />
+     
+            </div>
+        </div>
+          <div class="col-sm">
+            <div class="form-outline">
+                <InputSelect id="SuppId" @bind-Value="_invoice.SuppId" 
+                class="form-control "  >
+                 <option value="0">أختار العميل </option>
+                    @foreach (var item in _suppliers)
+                   {
+                        <option value="@item.SupplierID">@item.SupplierName</option>
+
+                   }
+                  
+              </InputSelect>
+               <ValidationMessage For="@(() => _invoice.SuppId)" />
+     
+            </div>
+        </div>
+        <br />
+       
+       
+ 
+             <InvoicesTampAdd  >  </InvoicesTampAdd>
+  
+   
+  
+  <div class ="row pt-3" style= "background :#a7f5b9;    margin: 0px; ">
+      
+@*  
+         <div class= "col-md-3 mb-1 ">
+       
+          <Input class= "btn btn-success sm-2" type ="submit" value="حفظ الفاتووره" />
+          
+          < class= "btn btn-danger" type ="submit" value="حذف الفاتووره" />
+         </div>*@
+
+        
+           <div class ="col-md-3">
+               <div class ="input-group mb-3">
+               <div class ="input-group-prepend">
+                   <span class ="input-group-text"> الاجمالي
+                      <InputNumber   @bind-Value="@_invoice.Total" disabled  readonly  id="Total"  />
+                      </span>
+               </div>
+               
+               @*<Input  bind="@_invoice.Total" class ="form-control" id="Total"  TValue="@_invoice.Total"  type ="number" />*@
+               </div>
+           </div>
+
+           <div class ="col-md-3">
+               <div class ="input-group mb-2">
+               <div class ="input-group-prepend">
+                   <span class ="input-group-text">الخصم 
+              <input  @bind-value="_invoice.Discont"  @bind-value:event="oninput" @onchange ="(() => CalculateToatl())" class ="form-control" id="Discont"  TValue="@_invoice.Discont"   />
+                @*<InputNumber   Value="@_invoice.Discont" id="Discont" ValueExpression="() =>_invoice.Discont"  ValueChanged="(decimal? value) => DiscountChanged(value)" Placeholder="Enter discount" />*@
+            <ValidationMessage For="@(() => _invoice.Discont)" />
+                </span>
+                </div>
+               </div>
+           </div>
+           <div class ="col-md-3">
+               <div class ="input-group mb-3">
+               <div class ="input-group-prepend">
+                   <span class ="input-group-text"> بعد الخصم
+              
+               @*<Input class ="form-control" id="Discontafter" TValue="@invoice.Discontafter"  disabled='true' type ="number" value="@invoice.Discontafter" />*@
+                    <InputNumber   @bind-Value="@_invoice.Discontafter" disabled readonly  id="Discontafter"  />
+                    </span>
+           </div>
+     </div>
+      </div>
+     
+    <div class="col-sm">
+          <div class="md-2">
+            <button type="submit" class="btn btn-success md-2 float-end">اضافة</button>
+           </div>
+        </div>
+     </div>
+            
+</div>
+
+</EditForm>
+
+  </div>
+ 
+@*<div class="col-sm">
+    <div class="form-outline">
+     
+      
+      <InputNumber id="ProductID" 
+                ValueChanged="@((int value) => GetInvoicetotallById(value))"
+                ValueExpression="@(() => ProId)" 
+                Value="@invoice.Total" class="form-control " >  
+                
+                 
+              </InputNumber>
+               <ValidationMessage For="@(() => invoiceTemps.ProductID)" />
+    </div>
+  </div>
+  
+      <div class="col-sm">
+  
+         <div class="input-group ">
+  
+            <span class="input-group-text">السعر</span>
+               <InputNumber id="Price" @bind-Value="invoiceTemps.Price" class="form-control ">
+                 
+                    </InputNumber>
+                   <span class="input-group-text">ريال</span>
+                     <ValidationMessage For="@(() => invoiceTemps.Price)" />
+         </div>
+       </div>
+         
+       <div class="col-sm">
+  
+            <div class="input-group ">
+  
+                <span class="input-group-text">الكمية</span>
+                     <InputNumber id="Quntity" @bind-Value="invoiceTemps.Quntity" class="form-control ">
+                 
+                            </InputNumber>
+                   
+                    
+            </div>
+
+             <ValidationMessage For="@(() => invoiceTemps.Quntity)" />
+        </div>*@    
+

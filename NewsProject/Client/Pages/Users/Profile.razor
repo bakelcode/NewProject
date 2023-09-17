@@ -1,0 +1,32 @@
+﻿@page "/profile/{userName}"
+@attribute [Authorize]
+<PageTitle>User Profile</PageTitle>
+
+<div class = "card">
+
+
+    <div class = "card-header"><h3>User @userName Profile</h3></div>
+
+    <div class="card-body">
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="UserName" class="form-label">Name :</label></div>
+                <div class="col-5"><label id="UserName" class="form-label">@_user.UserName</label></div>
+                <div class="col-1"><label for="Email" class="form-label">Email :</label></div>
+                <div class="col-5"><label id="Email" class="form-label">@_user.Email</label></div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="Country" class="form-label">Country :</label></div>
+                <div class="col-5"><label id="Country" class="form-label">@_user.Country</label></div>
+                <div class="col-1"><label for="PhoneNumber" class="form-label">Phone No:</label></div>
+                <div class="col-5"><label id="PhoneNumber" class="form-label">@_user.PhoneNumber</label></div>
+            </div>
+            </div>
+            <div class="form-group float-end btn btn-outline-dark">
+                <a href="/changepassword/@userName">Change Password</a>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,25 @@
+﻿@page "/editrole/{id}"
+@attribute [Authorize]
+<PageTitle>Edit Role</PageTitle>
+
+<div class = "card">
+
+
+    <div class = "card-header"><h3>Edit Role</h3></div>
+
+    <div class="card-body">
+        <EditForm Model="_roles" OnValidSubmit="Update">
+            <DataAnnotationsValidator />
+            <ValidationSummary />            
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="CategoryName" class="form-label">Name :</label></div>
+                <div class="col-11"><InputText class = "form-control" id="CategoryName" @bind-Value="_roles.Name"></InputText></div>
+            </div>
+            <ValidationMessage For="@(() => _roles.Name)" />
+            </div>
+            <button type="submit" class="btn btn-success mt-2 float-end">Save</button>
+        </EditForm>
+    </div>
+
+</div>

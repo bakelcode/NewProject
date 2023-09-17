@@ -1,0 +1,31 @@
+﻿@page "/getuserbyemail/{userEmail}"
+@attribute [Authorize]
+<PageTitle>User Details</PageTitle>
+
+<div class = "card">
+
+
+    <div class = "card-header"><h3>User @_user.Email Details</h3></div>
+
+    <div class="card-body">
+        <EditForm Model="_user">
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="UserName" class="form-label">Name :</label></div>
+                <div class="col-5"><InputText class = "form-control" id="UserName" @bind-Value="_user.UserName"></InputText></div>
+                <div class="col-1"><label for="Email" class="form-label">Email :</label></div>
+                <div class="col-5"><InputText class = "form-control" id="Email" @bind-Value="_user.Email"></InputText></div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="Country" class="form-label">Country :</label></div>
+                <div class="col-5"><InputText class = "form-control" id="Country" @bind-Value="_user.Country"></InputText></div>
+                <div class="col-1"><label for="PhoneNumber" class="form-label">Phone No:</label></div>
+                <div class="col-5"><InputText class = "form-control" id="PhoneNumber" @bind-Value="_user.PhoneNumber"></InputText></div>
+            </div>
+            </div>
+        </div>
+        </EditForm>
+    </div>
+
+</div>

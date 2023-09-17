@@ -1,0 +1,37 @@
+﻿@page "/Newbarench"
+@attribute [Authorize]
+<PageTitle>فرع جديد </PageTitle>
+
+<div class = "card">
+
+
+    <div class = "card-header"><h3>فرع جديد </h3></div>
+
+    <div class="card-body">
+        <EditForm Model="barench" OnValidSubmit="Create">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            @if(MyMessages != "")
+            {
+                <div class="alert alert-danger"><h3>@MyMessages</h3></div>
+            }
+            
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="BarenchName" class="form-label">الاسم :</label></div>
+                <div class="col-11"><InputText class = "form-control" id="BarenchName" @bind-Value="barench.BarenchName"></InputText></div>
+            </div>
+
+            <ValidationMessage For="@(() => barench.BarenchName)" />
+           </div>
+            <div class="form-group">
+                <div class="row">
+                <div class="col-1"><label for="Adderess" class="form-label">العنوان :</label></div>
+                <div class="col-11"><InputText class = "form-control" id="Adderess" @bind-Value="barench.Adderess"></InputText></div>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-success mt-2 float-end">حفظ</button>
+        </EditForm>
+    </div>
+
+</div>
